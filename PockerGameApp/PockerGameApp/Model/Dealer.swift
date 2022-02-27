@@ -13,16 +13,20 @@ class Dealer {
     private var cards = Cards()
     
     public func distributeCard(to gamblers: Gamblers, in rule: PokerGame.StudRule) {
-        guard wholeDeck.count >= rule.numberOfCard * (gamblers.count + 1) else { return }
-        shuffleWholeDeck()
-        for _ in 0..<rule.numberOfCard {
-            for index in 0..<gamblers.count {
+        if wholeDeck.isAvailableToDistribute(with: gamblers.count, in: rule) {
+            shuffleWholeDeck()
+            for _ in 0..<rule.numberOfCards {
+                for index in 0..<gamblers.count {
+                    guard let newCard = pickCard() else { return }
+                    gamblers[index].receiveCard(newCard)
+                }
                 guard let newCard = pickCard() else { return }
-                gamblers[index].receiveCard(newCard)
+                cards.add(newCard)
             }
-            guard let newCard = pickCard() else { return }
-            cards.add(newCard)
+        } else {
+            
         }
+        
     }
     
     private func pickCard() -> Card? {

@@ -8,16 +8,20 @@
 import Foundation
 
 class PokerGame {
-    enum StudRule {
+    enum StudRule: Int {
         
-        case sevenCardStud
-        case fiveCardStud
+        case sevenCardStud = 7
+        case fiveCardStud = 5
         
         var numberOfCard: Int {
             switch self {
             case .sevenCardStud: return 7
             case .fiveCardStud: return 5
             }
+        }
+        
+        func isContinuable(number1: Int, number2: Int) -> Bool {
+            return number1 >= self.rawValue * number2
         }
     }
     

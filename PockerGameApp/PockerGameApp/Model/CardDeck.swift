@@ -54,4 +54,8 @@ struct CardDeck {
     public mutating func add(_ card: Card) {
         self.deck.add(card)
     }
+    
+    public func isAvailableToDistribute(with numberOfGambler: Int, in gameRule: PokerGame.StudRule) -> Bool {
+        return gameRule.isContinuable(number1: count, number2: numberOfGambler+1)
+    }
 }
