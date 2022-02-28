@@ -13,21 +13,20 @@ class PokerGame {
         case sevenCardStud = 7
         case fiveCardStud = 5
         
-        var numberOfCard: Int {
-            switch self {
-            case .sevenCardStud: return 7
-            case .fiveCardStud: return 5
-            }
+        func isBigger(number: Int, than number2: Gamblers.count) -> Bool {
+            return number2.isSmaller(than: number, multiplier: self.rawValue)
         }
         
-        func isContinuable(number1: Int, number2: Int) -> Bool {
-            return number1 >= self.rawValue * number2
+        func loop(with number: Gamblers.count, event: (Int) -> Void) {
+            (0..<rawValue).forEach { _ in
+                number.loop(){event($0)}
+            }
         }
     }
     
-    let dealer: Dealer
-    let gamblers: Gamblers
-    let gameRule: StudRule
+    private let dealer: Dealer
+    private let gamblers: Gamblers
+    private let gameRule: StudRule
     
     init(numberOfGamblers: Gamblers.count, gameRule: StudRule) {
         
@@ -36,7 +35,9 @@ class PokerGame {
         self.gameRule = gameRule
     }
     
-    public func distributeCard() {
-        dealer.distributeCard(to: gamblers, in: gameRule)
+    public func start() {
+        if dealer.isAvailableToDistribute(to: gamblers, in: gameRule) {
+            dealer.distributeCard(to: gamblers, in: gameRule)
+        }
     }
 }

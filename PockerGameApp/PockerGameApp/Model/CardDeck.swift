@@ -55,7 +55,7 @@ struct CardDeck {
         self.deck.add(card)
     }
     
-    public func isAvailableToDistribute(with numberOfGambler: Int, in gameRule: PokerGame.StudRule) -> Bool {
-        return gameRule.isContinuable(number1: count, number2: numberOfGambler+1)
+    public func isAvailableToDistribute(with numberOfGambler: Gamblers.count, in gameRule: PokerGame.StudRule) -> Bool {
+        return gameRule.isBigger(number: count, than: numberOfGambler)
     }
 }

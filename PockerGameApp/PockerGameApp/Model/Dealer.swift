@@ -7,26 +7,20 @@
 
 import Foundation
 
-class Dealer {
+class Dealer: Gambler {
     
     private var wholeDeck = CardDeck()
-    private var cards = Cards()
+    
+    override init(name: String = "딜러") {
+        super.init(name: name)
+    }
     
     public func distributeCard(to gamblers: Gamblers, in rule: PokerGame.StudRule) {
-        if wholeDeck.isAvailableToDistribute(with: gamblers.count, in: rule) {
-            shuffleWholeDeck()
-            for _ in 0..<rule.numberOfCards {
-                for index in 0..<gamblers.count {
-                    guard let newCard = pickCard() else { return }
-                    gamblers[index].receiveCard(newCard)
-                }
-                guard let newCard = pickCard() else { return }
-                cards.add(newCard)
-            }
-        } else {
-            
+        shuffleWholeDeck()
+        rule.loop(with: gamblers.numberOfGamblers) { gamblerIndex in
+            guard let newCard = pickCard() else { return }
+            gamblers.receiveCard(newCard, gamblersIndex: gamblerIndex)
         }
-        
     }
     
     private func pickCard() -> Card? {
@@ -35,5 +29,9 @@ class Dealer {
     
     private func shuffleWholeDeck() {
         self.wholeDeck.shuffle()
+    }
+    
+    public func isAvailableToDistribute(to gamblers: Gamblers, in rule: PokerGame.StudRule) -> Bool {
+        return wholeDeck.isAvailableToDistribute(with: gamblers.numberOfGamblers, in: rule)
     }
 }

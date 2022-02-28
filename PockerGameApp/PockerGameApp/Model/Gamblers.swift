@@ -35,8 +35,7 @@ struct Gamblers {
     init(with numberOfGamblers: count) {
         self.numberOfGamblers = numberOfGamblers 
         var names = ["Sol", "Jee", "Eddy", "Jed", "Dale"]
-
-        for _ in 0..<numberOfGamblers.count {
+        numberOfGamblers.loop() {_ in
             let pickedIndex = (0..<names.count).randomElement() ?? 0
             let pickedName = names.remove(at: pickedIndex)
             let newGambler = Gambler(name: pickedName)
@@ -44,5 +43,10 @@ struct Gamblers {
         }
     }
     
+    func receiveCard(_ card: Card, gamblersIndex: Int) {
+        listOfGamblers[gamblersIndex].receiveCard(card)
     }
+
 }
+
+
