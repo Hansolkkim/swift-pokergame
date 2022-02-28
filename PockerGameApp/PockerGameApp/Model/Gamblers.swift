@@ -8,16 +8,32 @@
 import Foundation
 
 struct Gamblers {
-    var listOfGamblers = [Gambler]()
-    var count: Int {
-        return listOfGamblers.count
+    enum count: Int {
+        case one = 1
+        case two
+        case three
+        case four
+        
+        func isSmaller(than number: Int, multiplier: Int) -> Bool {
+            return self.rawValue * multiplier <= number
+        }
+        
+        func loop(event: (Int) -> Void) {
+            (0..<rawValue).forEach {
+                event($0)
+            }
+        }
     }
+    
+    var listOfGamblers = [Gambler]()
+    var numberOfGamblers: count
     
     subscript(index: Int) -> Gambler {
         return listOfGamblers[index]
     }
     
-    init(with numberOfGamblers: numberOfGamblers) {
+    init(with numberOfGamblers: count) {
+        self.numberOfGamblers = numberOfGamblers 
         var names = ["Sol", "Jee", "Eddy", "Jed", "Dale"]
 
         for _ in 0..<numberOfGamblers.count {
@@ -27,21 +43,6 @@ struct Gamblers {
             listOfGamblers.append(newGambler)
         }
     }
-
-}
-
-enum numberOfGamblers {
-    case one
-    case two
-    case three
-    case four
     
-    var count: Int {
-        switch self {
-            case .one: return 1
-            case .two: return 2
-            case .three: return 3
-            case .four: return 4
-        }
     }
 }

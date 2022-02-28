@@ -29,7 +29,7 @@ class PokerGame {
     let gamblers: Gamblers
     let gameRule: StudRule
     
-    init(numberOfGamblers: numberOfGamblers, gameRule: StudRule) {
+    init(numberOfGamblers: Gamblers.count, gameRule: StudRule) {
         
         self.dealer = Dealer()
         self.gamblers = Gamblers.init(with: numberOfGamblers)
