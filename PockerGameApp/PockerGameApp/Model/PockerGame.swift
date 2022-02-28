@@ -13,8 +13,8 @@ class PokerGame {
         case sevenCardStud = 7
         case fiveCardStud = 5
         
-        func isBigger(number: Int, than number2: Gamblers.count) -> Bool {
-            return number2.isSmaller(than: number, multiplier: self.rawValue)
+        func isAbleToDistribute(to countOfGamblers: Gamblers.count, with number: Int) -> Bool {
+            return countOfGamblers.isSmaller(than: number, multiplier: self.rawValue)
         }
         
         func loop(with number: Gamblers.count, event: (Int) -> Void) {

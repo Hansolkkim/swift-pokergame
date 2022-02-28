@@ -32,6 +32,6 @@ class Dealer: Gambler {
     }
     
     public func isAvailableToDistribute(to gamblers: Gamblers, in rule: PokerGame.StudRule) -> Bool {
-        return wholeDeck.isAvailableToDistribute(with: gamblers.numberOfGamblers, in: rule)
+        return rule.isAbleToDistribute(to: gamblers.numberOfGamblers, with: wholeDeck.count)
     }
 }

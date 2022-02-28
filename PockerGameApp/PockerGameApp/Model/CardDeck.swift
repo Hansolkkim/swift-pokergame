@@ -55,7 +55,4 @@ struct CardDeck {
         self.deck.add(card)
     }
     
-    public func isAvailableToDistribute(with numberOfGambler: Gamblers.count, in gameRule: PokerGame.StudRule) -> Bool {
-        return gameRule.isBigger(number: count, than: numberOfGambler)
-    }
 }
